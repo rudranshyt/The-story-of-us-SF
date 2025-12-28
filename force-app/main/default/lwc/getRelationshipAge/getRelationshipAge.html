@@ -1,0 +1,36 @@
+<template>
+    <div class="main">
+        <div class="inner-container">
+
+            <div class="photo-section">
+                <div class="avatar">
+                    <img src={myPhotoUrl} alt="Me">
+                </div>
+                <div class="heart-divider">❤️</div>
+                <div class="avatar">
+                    <img src={herPhotoUrl} alt="Her">
+                </div>
+            </div>
+
+            <h1>Our Time Together</h1>
+
+            <div class="stat-slider">
+                <div class="card">
+                    <span class="val">{numberOfYears}</span>
+                    <span class="lab">Years</span>
+                </div>
+                <div class="card">
+                    <span class="val">{numberOfMonths}</span>
+                    <span class="lab">Months</span>
+                </div>
+                <div class="card">
+                    <span class="val">{numberOfDays}</span>
+                    <span class="lab">Days</span>
+                </div>
+            </div>
+
+            <h1>and counting...</h1>
+
+        </div>
+    </div>
+</template>
