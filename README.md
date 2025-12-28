@@ -1,6 +1,6 @@
 # The Story of Us
 
-A romantic, custom-styled Lightning Web Component (LWC) designed for Salesforce Experience Cloud. This component calculates and displays the time spent in a relationship using a modern, soft-pink UI.
+A romantic, custom application that tracks special dates, relationship age and moments in our relationship
 
 ## Features
 * **Dynamic Age Calculation:** Shows our relationship age in months, days and years
