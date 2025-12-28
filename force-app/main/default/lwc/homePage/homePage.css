@@ -1,0 +1,6 @@
+.main {
+    background: linear-gradient(160deg, rgb(255, 192, 203) 0%, rgb(255, 154, 162) 100%);
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+}
