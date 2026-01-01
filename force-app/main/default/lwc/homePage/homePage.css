@@ -11,10 +11,41 @@
     width: 90%;
     max-width: 450px;
 }
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 15px;
+    /* Glass effect that looks great on pink */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.app-title {
+    font-size: 22px !important;
+    font-weight: 800;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 0 !important;
+    text-shadow: 2px 2px 0px rgba(150, 40, 70, 0.2);
+}
+
+.logo-icon {
+    font-size: 18px;
+    filter: drop-shadow(0 0 5px white);
+}
+
 .subtitle{
     text-align: center;
     padding-bottom: 5px;
 }
+
 .inner-container {
     background-color: rgb(255, 245, 247); 
     border-radius: 24px;
@@ -29,12 +60,6 @@ h1 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
-}
-
-.link-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
 }
 
 .romantic-link {
