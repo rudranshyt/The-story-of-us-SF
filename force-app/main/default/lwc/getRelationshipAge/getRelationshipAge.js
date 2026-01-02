@@ -134,9 +134,10 @@ export default class GetRelationshipAge extends NavigationMixin(LightningElement
         this.showLiveCounter = !this.showLiveCounter;
     }
     get myPhotoUrl() {
-        return communityPath + this.myPhoto;
+        return this.myPhoto;
+
     }
     get herPhotoUrl() {
-        return communityPath + this.herPhoto;
+        return this.herPhoto;
     }
 }
