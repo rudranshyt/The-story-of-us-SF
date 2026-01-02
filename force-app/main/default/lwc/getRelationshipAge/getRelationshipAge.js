@@ -5,38 +5,133 @@ import her_Photo from '@salesforce/resourceUrl/herPhoto';
 import communityPath from '@salesforce/community/basePath';
 import { NavigationMixin } from "lightning/navigation";
 
-export default class GetRelationshipAge extends NavigationMixin(LightningElement)  {
+export default class GetRelationshipAge extends NavigationMixin(LightningElement) {
     relationshipAge;
     startDate = start_date;
-    numberOfYears;
-    numberOfDays;
-    numberOfMonths;
+    cumulativeNumberOfYears;
+    cumulativeNumberOfDays;
+    cumulativeNumberOfMonths;
+    standardNumberOfYears;
+    standardNumberOfMonths;
+    standardNumberOfDays;
     myPhoto = my_Photo;
     herPhoto = her_Photo;
+    showLiveCounter = false;
+    liveAgeCounter = '';
+    timerId;
+
 
 
     connectedCallback() {
-        this.calculateRelationshipAge();
+        this.calculateCumulativeRelationshipAge();
+        this.calculateStandardRelationshipAge();
+        this.liveAgeCalculator();
+
+    }
+    disconnectedCallback() {
+        clearInterval(this.timerId);
     }
 
-    calculateRelationshipAge() {
+    calculateStandardRelationshipAge() {
         const today = new Date();
         const start = new Date(this.startDate);
-        
+
+        let y = today.getFullYear() - start.getFullYear();
+        let m = today.getMonth() - start.getMonth();
+        let d = today.getDate() - start.getDate();
+
+        if (d < 0) {
+            m -= 1;
+            const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            d += lastMonth.getDate();
+        }
+        if (m < 0) {
+            y -= 1;
+            m += 12;
+        }
+
+        this.standardNumberOfDays = d;
+        this.standardNumberOfMonths = m;
+        this.standardNumberOfYears = y
+
+        console.log('days-->', this.standardNumberOfDays);
+        console.log('months---->', this.standardNumberOfMonths);
+        console.log('yearss--->', this.standardNumberOfYears);
+    }
+
+    calculateCumulativeRelationshipAge() {
+        const today = new Date();
+        const start = new Date(this.startDate);
+
         const diffInMs = today - start;
 
         const msInDay = 1000 * 60 * 60 * 24;
-        const msInMonth = msInDay * 30.44;
-        const msInYear = msInDay * 365.25;
+        const daysInYear = 365;
+        const daysInMonth = 30;
 
-        const totalYears = diffInMs / msInYear;
-        const totalMonths = diffInMs / msInMonth;
         const totalDays = diffInMs / msInDay;
+        const totalMonths = totalDays / daysInMonth;
+        const totalYears = totalDays / daysInYear;
 
-        this.numberOfYears = totalYears < 1 ? totalYears.toFixed(2) : Math.floor(totalYears);
-        this.numberOfMonths = totalMonths < 1 ? totalMonths.toFixed(1) : Math.floor(totalMonths);
-        this.numberOfDays = totalDays < 1 ? totalDays.toFixed(1) : Math.floor(totalDays);
 
+
+        this.cumulativeNumberOfYears = totalYears < 1 ? totalYears.toFixed(2) : Math.floor(totalYears);
+        this.cumulativeNumberOfMonths = totalMonths < 1 ? totalMonths.toFixed(1) : Math.floor(totalMonths);
+        this.cumulativeNumberOfDays = totalDays < 1 ? totalDays.toFixed(1) : Math.floor(totalDays);
+
+        console.log('cumulative days---->', this.cumulativeNumberOfDays);
+        console.log('cumulative months---->', this.cumulativeNumberOfMonths);
+
+    }
+
+    liveAgeCalculator() {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+        }
+        const start = new Date(this.startDate).getTime();
+        const msInSecond = 1000;
+        const msInMinute = msInSecond * 60;
+        const msInHour = msInMinute * 60;
+        const msInDay = msInHour * 24;
+
+        const daysInMonth = 30;
+        const daysInYear = 365;
+
+        this.timerId = setInterval(() => {
+            let diffMs = Date.now() - start;
+
+            const years = Math.floor(diffMs / (msInDay * daysInYear));
+            diffMs -= years * msInDay * daysInYear;
+
+            const months = Math.floor(diffMs / (msInDay * daysInMonth));
+            diffMs -= months * msInDay * daysInMonth;
+
+            const days = Math.floor(diffMs / msInDay);
+            diffMs -= days * msInDay;
+
+            const hours = Math.floor(diffMs / msInHour);
+            diffMs -= hours * msInHour;
+
+            const minutes = Math.floor(diffMs / msInMinute);
+            diffMs -= minutes * msInMinute;
+
+            const seconds = Math.floor(diffMs / msInSecond);
+
+            this.liveAgeCounter =
+                `${years} years, ` +
+                `${months} months, ` +
+                `${days} days, ` +
+                `${hours} hours, ` +
+                `${minutes} minutes, ` +
+                `${seconds} seconds`;
+            //console.log('live age---->', this.liveAgeCounter);
+        }, 1000);
+
+
+    }
+
+    liveCounter() {
+        this.showLiveCounter = !this.showLiveCounter;
     }
     get myPhotoUrl() {
         return communityPath + this.myPhoto;

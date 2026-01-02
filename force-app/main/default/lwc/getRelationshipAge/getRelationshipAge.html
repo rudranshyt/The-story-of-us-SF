@@ -1,7 +1,8 @@
 <template>
     <div class="main">
-        <div class="inner-container">
+        <button class="toggle-btn" onclick={liveCounter}>{toggleButtonLabel}</button>
 
+        <div class="inner-container">
             <div class="photo-section">
                 <div class="avatar">
                     <img src={myPhotoUrl} alt="Me">
@@ -14,23 +15,48 @@
 
             <h1>Our Time Together</h1>
 
-            <div class="stat-slider">
-                <div class="card">
-                    <span class="val">{numberOfYears}</span>
-                    <span class="lab">Years</span>
+            <template lwc:if={showLiveCounter}>
+                <div class="card live-card">
+                    <span class="val pulse-text">{liveAgeCounter}</span>
+                    <span class="lab">Growing Every Second</span>
                 </div>
-                <div class="card">
-                    <span class="val">{numberOfMonths}</span>
-                    <span class="lab">Months</span>
+
+                <p class="subtitle">Our Progress</p>
+
+                <div class="stat-slider">
+                    <div class="card mini">
+                        <span class="val small">{cumulativeNumberOfYears}</span>
+                        <span class="lab">Total Years!!</span>
+                    </div>
+                    <div class="card mini">
+                        <span class="val small">{cumulativeNumberOfMonths}</span>
+                        <span class="lab">Total Months!!</span>
+                    </div>
+                    <div class="card mini">
+                        <span class="val small">{cumulativeNumberOfDays}</span>
+                        <span class="lab">Total Days!!</span>
+                    </div>
                 </div>
-                <div class="card">
-                    <span class="val">{numberOfDays}</span>
-                    <span class="lab">Days</span>
+            </template>
+
+            <template lwc:else>
+                <div class="stat-slider">
+                    <div class="card">
+                        <span class="val">{standardNumberOfYears}</span>
+                        <span class="lab">Years</span>
+                    </div>
+                    <div class="card">
+                        <span class="val">{standardNumberOfMonths}</span>
+                        <span class="lab">Months</span>
+                    </div>
+                    <div class="card">
+                        <span class="val">{standardNumberOfDays}</span>
+                        <span class="lab">Days</span>
+                    </div>
                 </div>
-            </div>
+            </template>
 
             <h1>and counting...</h1>
-
         </div>
     </div>
 </template>
