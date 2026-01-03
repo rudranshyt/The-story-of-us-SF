@@ -112,7 +112,7 @@ h1 {
 }
 
 .pulse-text {
-    animation: textPulse 2s ease-in-out infinite; /* Synced */
+    animation: textPulse 2s ease-in-out infinite;
     font-variant-numeric: tabular-nums;
     font-size: 1.5rem !important;
 }
@@ -139,4 +139,82 @@ h1 {
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.2); }
+}
+@media only screen and (max-width: 1024px) {
+    .inner-container {
+        max-width: 400px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .inner-container {
+        max-width: 90%;
+        padding: 30px 15px;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .val {
+        font-size: 1.6rem;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .main {
+        padding: 15px 10px;
+    }
+
+    .inner-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 12px;
+        border-radius: 24px;
+    }
+
+    
+    .avatar {
+        width: 65px;
+        height: 65px;
+        border: 3px solid white;
+    }
+
+    .heart-divider {
+        font-size: 20px;
+    }
+
+    
+    .stat-slider {
+        justify-content: flex-start; 
+        gap: 4px;
+        padding-bottom: 15px; 
+    }
+
+    .card {
+        min-width: 100px; 
+        padding: 15px 8px;
+    }
+
+
+    .pulse-text {
+        font-size: 1.1rem !important; 
+        line-height: 1.4;
+    }
+
+    .val.small {
+        font-size: 1.1rem;
+    }
+
+    h1 {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    .toggle-btn {
+        width: 100%;
+        max-width: 80px;
+        font-size: 14px;
+        padding: 12px;
+    }
 }

@@ -1,3 +1,4 @@
+
 .main {
     width: 100%;
     height: 10vh;
@@ -18,4 +19,38 @@
     font-weight: 600;
     color: rgb(120, 30, 60); 
     letter-spacing: 0.5px;
+    margin: 0;
+}
+@media only screen and (max-width: 768px) {
+    .main {
+        height: 8vh;
+        padding: 0 15px;
+    }
+    
+    .main h1 {
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .main {
+        height: 60px;
+        padding: 0 10px;
+        border-top: 1px solid rgb(255, 215, 225);
+    }
+
+    .main h1 {
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        line-height: 1.2;
+    }
+}
+
+/* Landscape Mode for small phones (Optional but recommended) */
+@media only screen and (max-height: 450px) {
+    .main {
+        height: 45px; /* Very slim header when screen height is tiny */
+    }
+    .main h1 {
+        font-size: 14px;
+    }
 }
